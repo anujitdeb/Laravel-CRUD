@@ -20,7 +20,7 @@
         <!-- Links -->
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-light" href="/products">products</a>
+                <a class="nav-link text-light" href="/product">products</a>
             </li>
             </li>
         </ul>
@@ -29,8 +29,46 @@
 </nav>
 
 <div class="container">
+
+    @if($message = Session::get('success'))
+        <div class="alert alert-success alert-block mt-1">
+            {{ $message }}
+        </div>
+    @endif
+
     <div style="text-align: right">
-        <a href="products/create" class="btn btn-dark mt-2">New Product</a>
+        <a href="product/create" class="btn btn-dark mt-2">New Product</a>
+    </div>
+
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">SN</th>
+                <th scope="col">name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <?php $i = 1 ?>
+            <tbody>
+            @foreach($products as $product)
+                <tr>
+                    <th scope="row">{{ $i++ }}</th>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->description }}</td>
+                    <td>
+                        <img src="products/{{ $product->image }}" class="rounded-circle" width="40" height="40">
+                    </td>
+                    <td>
+                        <a href="product/{{ $product->id }}/edit" class="btn btn-primary">edit</a>
+                        <a href="product/delete/{{ $product->id }}" class="btn btn-danger">delete</a>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
 

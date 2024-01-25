@@ -18,8 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'products'],function (){
+Route::group(['prefix' => 'product'],function (){
     Route::get('/', [ProductController::class, 'index']);
     Route::get('/create', [ProductController::class, 'create']);
-    Route::get('/store', [ProductController::class, 'create']);
+    Route::post('/store', [ProductController::class, 'store']);
+    Route::get('/{id}/edit', [ProductController::class, 'edit']);
+    Route::put('/update/{id}', [ProductController::class, 'update']);
+    Route::get('/delete/{id}', [ProductController::class, 'destroy']);
 });
